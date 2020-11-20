@@ -1,21 +1,44 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
-    </ion-toolbar>
+	<ion-toolbar color="danger">
+	  <ion-buttons slot="start">
+		<ion-menu-button color="light"></ion-menu-button>
+	  </ion-buttons>
+	  <ion-title>RECEIVER</ion-title>
+	</ion-toolbar>
   </ion-header>
-
+  
+<ion-content [fullscreen]="true">
+  
   <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+	<form [formGroup]="intentReplyForm" (ngSubmit)="sendIntent()"  novalidate>
+		<ion-text color="danger" size="medium"><b>Reply Payment Intent: {{intentReplyForm.value.eventReference}}</b></ion-text>
+		<ion-row class="ion-justify-content-around">
+			<ion-col size="11">
+				<ion-list>
+					<ion-item>
+						<ion-input style="margin-left: 10px;"  maxlength="11" formControlName="phone" placeholder="08012345678" type="tel"></ion-input>
+					</ion-item>			
+					<ion-item>
+						<ion-input placeholder="Name" type="text" required formControlName="name"></ion-input>
+					</ion-item>
+					<ion-item>
+						<ion-input placeholder="Amount" type="text" required formControlName="amount"></ion-input>
+					</ion-item>
+					<ion-item>
+						<ion-label>Payment is made</ion-label>
+						<ion-toggle formControlName="paid"></ion-toggle>
+					</ion-item>
+
+					<br><br>
+					<ion-button expand="full" size="medium" color="danger" type="submit">Reply Intent</ion-button>
+				</ion-list>
+			</ion-col>
+		</ion-row>
+	</form>
+	<br><br><br><br>
+    <strong class="capitalize">Devpitch Tech.</strong>
+    <p><a target="_blank" rel="noopener noreferrer" href="https://devpitch.com.ng">Visit our website</a></p>
   </div>
-</ion-content>
+ 
+  </ion-content>
+  

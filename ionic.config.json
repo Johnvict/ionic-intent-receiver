@@ -1,5 +1,7 @@
 {
   "name": "intent-receiver",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
