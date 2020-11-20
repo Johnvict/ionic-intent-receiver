@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IntentOptions, WebIntent } from '@ionic-native/web-intent/ngx';
+import { Platform } from '@ionic/angular';
 
 @Component({
 	selector: 'app-folder',
@@ -19,12 +20,13 @@ export class FolderPage implements OnInit {
 
 	constructor(
 		private webIntent: WebIntent,
+		private platform: Platform
 	) { }
 
 	ngOnInit() {
 		//
 		console.log('HEY onInit WORKS!');
-		this.registerReceiver();
+		this.platform.ready().then( _ => this.registerReceiver());
 	}
 	registerReceiver() {
 		this.webIntent.registerBroadcastReceiver({
@@ -60,9 +62,11 @@ export class FolderPage implements OnInit {
 			extras: { ...this.intentReplyForm.value }
 		};
 
-		this.webIntent.sendBroadcast(options);
-		this.webIntent.sendResult({
-			extras: { ...this.intentReplyForm.value }
+		this.platform.ready().then( _ => {
+			this.webIntent.sendBroadcast(options);
+			this.webIntent.sendResult({
+				extras: { ...this.intentReplyForm.value }
+			});
 		});
 	}
 }
